@@ -1,0 +1,77 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background-color: #ffffff; /* white background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-size: 7.5vmin;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+  grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+  background-color: #f5f5f5; /* very light gray */
+  gap: var(--cell-gap);
+  border-radius: 1vmin;
+  padding: var(--cell-gap);
+  position: relative;
+}
+
+.cell {
+  background-color: #e0e0e0; /* light neutral gray */
+  border-radius: 1vmin;
+}
+
+.tile {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  /* Remove HSL background and text color to allow dynamic colors from JS */
+  border-radius: 1vmin;
+  top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  font-weight: bold;
+  animation: show 200ms ease-in-out;
+  transition: 100ms ease-in-out;
+  color: white; /* default text color */
+}
+
+@keyframes show {
+  0% {
+    opacity: .5;
+    transform: scale(0);
+  }
+}
+
+/* Restart button styles */
+#restart-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1vmin 3vmin;
+  font-size: 5vmin;
+  background-color: #4285F4; /* Google's blue */
+  color: white;
+  border: none;
+  border-radius: 1vmin;
+  cursor: pointer;
+  z-index: 10;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+#restart-button:hover {
+  background-color: #3367D6; /* darker blue on hover */
+}
